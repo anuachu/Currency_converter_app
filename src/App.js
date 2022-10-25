@@ -463,7 +463,7 @@ function App() {
       203.771001,
     }
       
-    setRates(result);
+    setRates(object);
     //})
   }, []);
 
