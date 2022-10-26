@@ -3,6 +3,7 @@ import './CurrencyInput.css';
 
 function CurrencyInput(props) {
   return (
+    
     <div className="group">
       <input type="text" value={props.amount}
         onChange={ev => props.onAmountChange(ev.target.value)}/>
@@ -13,8 +14,9 @@ function CurrencyInput(props) {
           {currency}</option>
         ))}
       </select>
-
+      
     </div>
+    
   )
 }
 

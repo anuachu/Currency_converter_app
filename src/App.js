@@ -3,6 +3,10 @@ import CurrencyInput from "./CurrencyInput";
 import {useEffect, useState} from "react";
 import axios from "axios";
 import env from "react-dotenv";
+import { Routes, Route, Link} from 'react-router-dom'
+import CreditCard from './CreditCardInput';
+import { render } from '@testing-library/react';
+
 
 function App() {
 
@@ -500,9 +504,11 @@ function App() {
     setCurrency2(currency2);
   }
 
-
-
+  
+ 
+  
   return (
+    
     <div className="App">
       <h1>Currency Converter</h1>
       <CurrencyInput
@@ -518,13 +524,19 @@ function App() {
         currencies={Object.keys(rates)} 
         amount={amount2} 
         currency={currency2}
+        
       />
-     
-      <button>Get Started</button>
-
+      <p>Convertion charge 35 Dollars</p>
+      {/* <button onClick={routeChange}>Get Started</button> */}
+      <Link to='/CreditCardInput'>Get started</Link>
+      <Routes>
+        <Route path='/CreditCardInput' element={ <CreditCard />}/>
+      </Routes>
       
-    </div>
+      </div>
+
   );
+        
 }
 
 export default App;
