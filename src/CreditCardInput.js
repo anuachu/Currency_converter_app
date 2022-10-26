@@ -2,6 +2,7 @@ import React from 'react'
 import './CreditCardInput.css';
 import { useEffect } from 'react';
 import axios from "axios";
+import userEvent from '@testing-library/user-event';
 
 
 class CreditCard extends React.Component {
@@ -10,7 +11,8 @@ class CreditCard extends React.Component {
     cardHolderName: "",
     cardExpirationDate: "",
     cardCVV: "",
-    cardType: "💳"
+    cardType: "💳",
+    creditcard: []
   }
 
   componentDidMount() {
@@ -21,6 +23,7 @@ class CreditCard extends React.Component {
      }))
   }
 
+  
   
   setCardType = type => {
     this.setState({ cardType: type });
@@ -82,7 +85,8 @@ class CreditCard extends React.Component {
       cardHolderName,
       cardExpirationDate,
       cardCVV,
-      cardType
+      cardType,
+      
     } = this.state;
     return (
       <div className="container">
@@ -163,31 +167,11 @@ class CreditCard extends React.Component {
           </div>
           <button>Submit</button>
         </form>
-        {/* <div className="credit-card">
-          <div className="credit-card-inner">
-            <div className="credit-card-front">
-              
-              <div id="card-type">{cardType}</div>
-              <div id="card-number">{cardNumber}</div>
-
-              <div id="card-expiration">
-                {cardExpirationDate !== "" && <div id="validthru">Valid Thru</div>}
-                {cardExpirationDate}
-              </div>
-
-              <div id="card-holder-name">{cardHolderName}</div>
-            </div>
-            <div className="credit-card-back">
-              <div className="card-stripe" />
-              <div className="card-sig-container">
-                <div className="signature">{cardHolderName}</div>
-                CVC {cardCVV}
-              </div>
-              
-            </div>
-          </div>
-        </div> */}
+        <ul>
+          {this.state.creditcard}
+        </ul>
       </div>
+     
      
     );
   }
