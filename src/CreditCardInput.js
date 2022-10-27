@@ -2,7 +2,7 @@ import React from 'react'
 import './CreditCardInput.css';
 import { useEffect } from 'react';
 import axios from "axios";
-import userEvent from '@testing-library/user-event';
+
 
 
 class CreditCard extends React.Component {
@@ -12,19 +12,19 @@ class CreditCard extends React.Component {
     cardExpirationDate: "",
     cardCVV: "",
     cardType: "💳",
-    creditcard: []
+    creditcard: [],
+    amount: 0
   }
 
   componentDidMount() {
     fetch('/api/currency')
      .then(res => res.json())
      .then(res => this.setState({
-      creditcard: res.creditcard
+      creditcard: res
      }))
+    
   }
 
-  
-  
   setCardType = type => {
     this.setState({ cardType: type });
   };
@@ -75,9 +75,16 @@ class CreditCard extends React.Component {
     this.setState({ cardCVV });
   };
 
-  handleSubmit = e => {
-   console.log(this.state)
+  handleChange() {
+    
   }
+  
+  handleClick(){
+
+  }
+  
+  
+  
 
   render() {
     const {
@@ -88,6 +95,7 @@ class CreditCard extends React.Component {
       cardType,
       
     } = this.state;
+    
     return (
       <div className="container">
         <div className="credit-card">
@@ -168,7 +176,19 @@ class CreditCard extends React.Component {
           <button>Submit</button>
         </form>
         <ul>
-          {this.state.creditcard}
+          {/* {this.state.creditcard.map(array => {
+            <li>{array.cardHolderName}</li>
+          })} */}
+          {this.state.creditcard.map((person, index) => (
+        <p> {person.cardholdername}  <br/> 
+            {person.cardnumber}<br/>
+            {person.cardtype}<br/>
+            {person.balance}
+            <input type="number" 
+            onChange={this.handleChange}
+            />
+            <button onClick={this.handleClick}>Add money</button>
+        </p>))}
         </ul>
       </div>
      
