@@ -17,9 +17,9 @@ function App() {
   const [rates, setRates] = useState([]);
 
   useEffect(() => {
-    // axios.get('https://api.apilayer.com/exchangerates_data/latest?base=AUD&apikey=jILmckX9x5WlPxtc30b9jPcq43UcWpOr')
+    // axios.get('https://api.apilayer.com/exchangerates_data/latest?base=AUD&apikey=jILmckX9x5WlPxtc30b9jPcq43UcWpOr&timestamp: 1666854064')
     // .then(response => {
-    // var result = response.data.rates
+    // var result = response.data
     // console.log(result)
     var object = {
       AED: 2.324449,
@@ -510,12 +510,13 @@ function App() {
   return (
     
     <div className="App">
-      <h1>Currency Converter</h1>
+      <h1>Send money from {currency1} to {currency2}</h1>
       <CurrencyInput
         onAmountChange={handleAmount1Change}
         onCurrencyChange={handleCurrency1Change}
         currencies={Object.keys(rates)} 
         amount={amount1} 
+         class="currency-flag currency-flag-usd"
         currency={currency1}
       />
       <CurrencyInput 
@@ -524,14 +525,24 @@ function App() {
         currencies={Object.keys(rates)} 
         amount={amount2} 
         currency={currency2}
-        
       />
-      <p>Convertion charge 35 Dollars</p>
+
+      <br />
+      <br />
+      <br />
+      <br />
+      <p>Conversion charge 35 Dollars</p>
+      <br />
+     
       {/* <button onClick={routeChange}>Get Started</button> */}
+      <div className = "group1">
       <Link to='/CreditCardInput'>Get started</Link>
+      
+      </div>
       <Routes>
         <Route path='/CreditCardInput' element={ <CreditCard />}/>
       </Routes>
+    
       
       </div>
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import './CreditCardInput.css';
-import { useEffect } from 'react';
-import axios from "axios";
+
+
 
 
 
@@ -13,7 +13,10 @@ class CreditCard extends React.Component {
     cardCVV: "",
     cardType: "💳",
     creditcard: [],
-    amount: 0
+    balance: 0,
+    show: 'block',
+    message: ''
+
   }
 
   componentDidMount() {
@@ -22,8 +25,16 @@ class CreditCard extends React.Component {
      .then(res => this.setState({
       creditcard: res
      }))
-    
   }
+
+  // componentDidMount() {
+  //   const requestOptions = {
+  //     method: 'POST',
+  //     headers:
+  //   }
+  // }
+
+  
 
   setCardType = type => {
     this.setState({ cardType: type });
@@ -75,17 +86,21 @@ class CreditCard extends React.Component {
     this.setState({ cardCVV });
   };
 
-  handleChange() {
-    
+  handleSubmit= ()=> {
+   console.log(this.state)
+  }
+
+ handleClick = e => {
+    const { show, message } = this.state
+
+    if(show === 'block'){
+      this.setState({ show: 'none',message: 'Payment Success' })
+    }else {
+      this.setState({ show: 'block'})
+    }
   }
   
-  handleClick(){
-
-  }
-  
-  
-  
-
+ 
   render() {
     const {
       cardNumber,
@@ -93,11 +108,14 @@ class CreditCard extends React.Component {
       cardExpirationDate,
       cardCVV,
       cardType,
-      
+      balance,
+      show,
+      message
     } = this.state;
     
     return (
-      <div className="container">
+      <div>
+      <div className="container" style={{display: show, overlay: "180px"}}>
         <div className="credit-card">
           <div className="credit-card-inner">
             <div className="credit-card-front">
@@ -122,7 +140,7 @@ class CreditCard extends React.Component {
             </div>
           </div>
         </div>
-        <form onSubmit={this.handleSubmit} className="card-form">
+        <div className="card-form">
           <label className="input-label">Credit Card Number</label>
           <input
             placeholder="Enter your credit card number"
@@ -173,25 +191,29 @@ class CreditCard extends React.Component {
               />
             </div>
           </div>
-          <button>Submit</button>
-        </form>
+          <button onClick={this.handleSubmit}>Submit</button>
+        </div>
         <ul>
           {/* {this.state.creditcard.map(array => {
             <li>{array.cardHolderName}</li>
           })} */}
           {this.state.creditcard.map((person, index) => (
-        <p> {person.cardholdername}  <br/> 
+        <div className="credit"> {person.cardholdername}  <br/> 
             {person.cardnumber}<br/>
             {person.cardtype}<br/>
-            {person.balance}
-            <input type="number" 
-            onChange={this.handleChange}
-            />
-            <button onClick={this.handleClick}>Add money</button>
-        </p>))}
+             Balance: {balance}
+            <input type="text" onChange={this.handleChange}/>
+            <div className='buttondiv'>
+            <button onClick={() => this.setState({ balance: this.state.balance + 100})}>Add Money</button>
+            <br/>
+            <button onClick={this.handleClick}>Proceed to pay</button>
+            </div>
+        </div>))}
         </ul>
-      </div>
-     
+    </div>
+    
+    <h1>{message}</h1>
+    </div>
      
     );
   }
