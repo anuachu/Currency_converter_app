@@ -14,6 +14,7 @@ class CreditCard extends React.Component {
     cardType: "💳",
     creditcard: [],
     balance: 0,
+    amount: 0,
     show: 'block',
     message: ''
 
@@ -25,6 +26,33 @@ class CreditCard extends React.Component {
      .then(res => this.setState({
       creditcard: res
      }))
+  }
+
+  handleSubmit = event =>{
+    console.log("HI")
+    event.preventDefault()
+   
+
+    fetch('/api/currency', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(
+        {
+          cardNumber: this.state.cardNumber,
+          cardHolderName: this.state.cardHolderName,
+          cardExpirationDate: this.state.cardExpirationDate,
+          cardCVV: this.state.cardCVV,
+          cardType: this.state.cardType,
+          balance: this.state.balance
+        }
+      )
+    })
+
+    .then(res => res.json())
+    .then(credit => {
+      console.log(credit)
+      
+    })
   }
 
   // componentDidMount() {
@@ -86,9 +114,7 @@ class CreditCard extends React.Component {
     this.setState({ cardCVV });
   };
 
-  handleSubmit= ()=> {
-   console.log(this.state)
-  }
+  
 
  handleClick = e => {
     const { show, message } = this.state
@@ -108,7 +134,7 @@ class CreditCard extends React.Component {
       cardExpirationDate,
       cardCVV,
       cardType,
-      balance,
+      amount,
       show,
       message
     } = this.state;
@@ -140,7 +166,7 @@ class CreditCard extends React.Component {
             </div>
           </div>
         </div>
-        <div className="card-form">
+        <form onClick={this.handleSubmit}className="card-form">
           <label className="input-label">Credit Card Number</label>
           <input
             placeholder="Enter your credit card number"
@@ -178,7 +204,7 @@ class CreditCard extends React.Component {
             <div
               style={{ display: "flex", flexDirection: "column", width: "50%" }}
             >
-              <label className="input-label">CVC Security Code</label>
+              <label className="input-label">CVV Security Code</label>
               <input
                 options={{
                   numeral: "true"
@@ -189,10 +215,21 @@ class CreditCard extends React.Component {
                 className="text-input"
                 onChange={e => this.setCVV(e)}
               />
+              <label className="input-label">Balance Amount</label>
+               <input
+                options={{
+                  numeral: "true"
+                }}
+                placeholder="Enter balance"
+                maxLength="3"
+                value={cardCVV}
+                className="text-input"
+                onChange={e => this.setCVV(e)}
+              />
             </div>
           </div>
-          <button onClick={this.handleSubmit}>Submit</button>
-        </div>
+          <button>Submit</button>
+        </form>
         <ul>
           {/* {this.state.creditcard.map(array => {
             <li>{array.cardHolderName}</li>
@@ -201,10 +238,10 @@ class CreditCard extends React.Component {
         <div className="credit"> {person.cardholdername}  <br/> 
             {person.cardnumber}<br/>
             {person.cardtype}<br/>
-             Balance: {balance}
+             amount: {amount}
             <input type="text" onChange={this.handleChange}/>
             <div className='buttondiv'>
-            <button onClick={() => this.setState({ balance: this.state.balance + 100})}>Add Money</button>
+            <button onClick={() => this.setState({ amount: this.state.amount + 100})}>Add Money</button>
             <br/>
             <button onClick={this.handleClick}>Proceed to pay</button>
             </div>
