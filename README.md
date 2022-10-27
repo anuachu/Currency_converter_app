@@ -1,6 +1,6 @@
 # Currency Convertor application
 
-This is my frist exciting project done in the Sofware Engineering Immersive bootcamp at General Assembly. This simple application is a very good example to showcase how a developer would move through obstacles and solves problems. 
+This is my first exciting project done in the Sofware Engineering Immersive bootcamp at General Assembly. This simple application is a very good example to showcase how a developer would move through obstacles and solves problems. 
 
 ## :computer: [Click here](https://nameless-spire-56626.herokuapp.com/) to see my live project!
 
