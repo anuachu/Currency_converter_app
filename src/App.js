@@ -4,8 +4,8 @@ import {useEffect, useState} from "react";
 import axios from "axios";
 import env from "react-dotenv";
 import { Routes, Route, Link} from 'react-router-dom'
-import CreditCard from './CreditCardInput';
-import { render } from '@testing-library/react';
+
+import Favourites from './Favourites';
 
 
 function App() {
@@ -15,6 +15,8 @@ function App() {
   const [currency1, setCurrency1] = useState('AUD');
   const [currency2, setCurrency2] = useState('INR');
   const [rates, setRates] = useState([]);
+  const [fav, setFav] = useState([]);
+  
 
   useEffect(() => {
     // axios.get('https://api.apilayer.com/exchangerates_data/latest?base=AUD&apikey=jILmckX9x5WlPxtc30b9jPcq43UcWpOr&timestamp: 1666854064')
@@ -494,12 +496,22 @@ function App() {
     setCurrency2(currency2);
   }
 
+  function saveFavourites() {
+    const currentCountry = currency1
+    const currentCountry1 = currency2
+     
+    setFav([...fav,currentCountry + " to " + currentCountry1]);
+  }
   
  
   
   return (
     
     <div className="App">
+      <Routes>
+        <Route path='/Favourites' element={ <Favourites />}/>
+      </Routes>
+      <Link to='/Favourites'>Favourites</Link>
       <h1>Send money from {currency1} to {currency2}</h1>
       <CurrencyInput
         onAmountChange={handleAmount1Change}
@@ -517,23 +529,8 @@ function App() {
         currency={currency2}
       />
 
-      <br />
-      <br />
-      <br />
-      <br />
-      <p>Conversion charge 35 Dollars</p>
-      <br />
-     
-      {/* <button onClick={routeChange}>Get Started</button> */}
-      <div className = "group1">
-      <Link to='/CreditCardInput'>Get started</Link>
-      
-      </div>
-      <Routes>
-        <Route path='/CreditCardInput' element={ <CreditCard />}/>
-      </Routes>
-    
-      
+      <button onClick={saveFavourites}>Save the conversion</button>
+      <p>{fav}</p>
       </div>
 
   );
