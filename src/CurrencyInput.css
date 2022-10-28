@@ -17,3 +17,12 @@ input{
 select{
   padding: 15px;
 }
+.credit{
+    width: 40%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 20px;
+    background: linear-gradient(to top right, #ffa200 0%, #ff0866 100%);
+    padding: 20px;
+    margin:20px;
+}

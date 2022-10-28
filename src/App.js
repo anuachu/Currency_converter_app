@@ -4,8 +4,8 @@ import {useEffect, useState} from "react";
 import axios from "axios";
 import env from "react-dotenv";
 import { Routes, Route, Link} from 'react-router-dom'
-import CreditCard from './CreditCardInput';
-import { render } from '@testing-library/react';
+
+import Favourites from './Favourites';
 
 
 function App() {
@@ -15,11 +15,13 @@ function App() {
   const [currency1, setCurrency1] = useState('AUD');
   const [currency2, setCurrency2] = useState('INR');
   const [rates, setRates] = useState([]);
+  const [fav, setFav] = useState([]);
+  
 
   useEffect(() => {
-    // axios.get('https://api.apilayer.com/exchangerates_data/latest?base=AUD&apikey=jILmckX9x5WlPxtc30b9jPcq43UcWpOr')
+    // axios.get('https://api.apilayer.com/exchangerates_data/latest?base=AUD&apikey=jILmckX9x5WlPxtc30b9jPcq43UcWpOr&timestamp: 1666854064')
     // .then(response => {
-    // var result = response.data.rates
+    // var result = response.data
     // console.log(result)
     var object = {
       AED: 2.324449,
@@ -51,21 +53,11 @@ function App() {
       BZD: 1.269276,
       CAD: 0.866531,
       CDF: 1281.480806,
-      CHF
-      : 
-      0.632441,
-      CLF
-      : 
-      0.022631,
-      CLP
-      : 
-      624.445181,
-      CNY
-      : 
-      4.596223,
-      COP
-      : 
-      3157.821693,
+      CHF: 0.632441,
+      CLF: 0.022631,
+      CLP: 624.445181,
+      CNY: 4.596223,
+      COP: 3157.821693,
       CRC
       : 
       391.380699,
@@ -504,18 +496,29 @@ function App() {
     setCurrency2(currency2);
   }
 
+  function saveFavourites() {
+    const currentCountry = currency1
+    const currentCountry1 = currency2
+     
+    setFav([...fav,currentCountry + " to " + currentCountry1]);
+  }
   
  
   
   return (
     
     <div className="App">
-      <h1>Currency Converter</h1>
+      <Routes>
+        <Route path='/Favourites' element={ <Favourites />}/>
+      </Routes>
+      <Link to='/Favourites'>Favourites</Link>
+      <h1>Send money from {currency1} to {currency2}</h1>
       <CurrencyInput
         onAmountChange={handleAmount1Change}
         onCurrencyChange={handleCurrency1Change}
         currencies={Object.keys(rates)} 
         amount={amount1} 
+         class="currency-flag currency-flag-usd"
         currency={currency1}
       />
       <CurrencyInput 
@@ -524,15 +527,10 @@ function App() {
         currencies={Object.keys(rates)} 
         amount={amount2} 
         currency={currency2}
-        
       />
-      <p>Convertion charge 35 Dollars</p>
-      {/* <button onClick={routeChange}>Get Started</button> */}
-      <Link to='/CreditCardInput'>Get started</Link>
-      <Routes>
-        <Route path='/CreditCardInput' element={ <CreditCard />}/>
-      </Routes>
-      
+
+      <button onClick={saveFavourites}>Save the conversion</button>
+      <p>{fav}</p>
       </div>
 
   );
