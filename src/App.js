@@ -500,16 +500,32 @@ function App() {
     const currentCountry = currency1
     const currentCountry1 = currency2
      
-    setFav([...fav,currentCountry + " to " + currentCountry1]);
+    setFav([...fav,currentCountry ]);
   }
   
- 
-  
+  function remove(indexOfLayerClicked){
+    const updatedFav = fav.filter((layer, i) =>
+      i !== indexOfLayerClicked
+    )
+    setFav(updatedFav)
+  }
+
+  function changeLayer(indexOfLayerClicked){
+    const updatedFav = fav.filter((layer, i) =>
+      i == indexOfLayerClicked
+    )
+    setCurrency1(updatedFav)
+  }
+
   return (
-    
     <div className="App">
       <Routes>
-        <Route path='/Favourites' element={ <Favourites />}/>
+        <Route path='/Favourites' element={ 
+        <Favourites 
+        fav={fav}
+        remove={remove}
+        changeLayer={changeLayer}
+        />}/>
       </Routes>
       <Link to='/Favourites'>Favourites</Link>
       <h1>Send money from {currency1} to {currency2}</h1>
@@ -530,7 +546,7 @@ function App() {
       />
 
       <button onClick={saveFavourites}>Save the conversion</button>
-      <p>{fav}</p>
+     
       </div>
 
   );

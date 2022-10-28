@@ -14,7 +14,6 @@ function CurrencyInput(props) {
           {currency}</option>
         ))}
       </select>
-      
     </div>
     
   )
