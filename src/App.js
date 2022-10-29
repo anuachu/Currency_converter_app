@@ -500,7 +500,8 @@ function App() {
     const currentCountry = currency1
     const currentCountry1 = currency2
      
-    setFav([...fav,currentCountry ]);
+    setFav([...fav,currentCountry + " " + currentCountry1]);
+    
   }
   
   function remove(indexOfLayerClicked){
@@ -511,10 +512,19 @@ function App() {
   }
 
   function changeLayer(indexOfLayerClicked){
-    const updatedFav = fav.filter((layer, i) =>
-      i == indexOfLayerClicked
-    )
-    setCurrency1(updatedFav)
+    const updatedFav = fav.filter((layer,i)=>{
+     if(i == indexOfLayerClicked){
+      return layer
+      }
+    })
+    const updatedFav1 = updatedFav.map((layer, i) => {
+      return layer.split(' ')
+    })
+   
+    // console.log(updatedFav1[0][0])
+    setCurrency1(updatedFav1[0][0])
+    setCurrency2(updatedFav1[0][1])
+   
   }
 
   return (
