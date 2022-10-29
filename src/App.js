@@ -6,6 +6,9 @@ import env from "react-dotenv";
 import { Routes, Route, Link} from 'react-router-dom'
 
 import Favourites from './Favourites';
+import Chip from '@mui/material/Chip';
+import './Favourites.css'
+
 
 
 function App() {
@@ -529,15 +532,24 @@ function App() {
 
   return (
     <div className="App">
-      <Routes>
-        <Route path='/Favourites' element={ 
-        <Favourites 
-        fav={fav}
-        remove={remove}
-        changeLayer={changeLayer}
-        />}/>
-      </Routes>
-      <Link to='/Favourites'>Favourites</Link>
+      <h3>Favourite Conversion Types</h3>
+      <div className="favorites">
+      <section className="fav">
+        {fav.map((fav, index) =>
+          // <p key={index}
+          // onClick={() => changeLayer(index)}>{fav}
+          // <button onClick={() => remove(index)}>X</button>
+          // </p>
+          <Chip key={index}
+          onClick={() => changeLayer(index)}
+          label={fav}
+           variant="outlined"
+          onDelete={() => remove(index)} 
+          />
+        )}
+      </section>
+      </div>
+      
       <h1>Send money from {currency1} to {currency2}</h1>
       <CurrencyInput
         onAmountChange={handleAmount1Change}
@@ -554,9 +566,9 @@ function App() {
         amount={amount2} 
         currency={currency2}
       />
-
-      <button onClick={saveFavourites}>Save the conversion</button>
-     
+      <div className="button">
+      <button onClick={saveFavourites}>Add Conversion to Favourites</button>
+      </div>
       </div>
 
   );
