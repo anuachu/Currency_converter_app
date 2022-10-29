@@ -1,0 +1,20 @@
+.favorites{
+  border: 1px solid grey;
+  padding: 20px;
+}
+
+.css-qfts63-MuiButtonBase-root-MuiChip-root{
+  margin: 10px;
+}
+
+.button{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+}
+button{
+  padding: 12px;
+  color: white;
+  background-color: rgb(52, 71, 92);
+}

@@ -6,6 +6,9 @@ import env from "react-dotenv";
 import { Routes, Route, Link} from 'react-router-dom'
 
 import Favourites from './Favourites';
+import Chip from '@mui/material/Chip';
+import './Favourites.css'
+
 
 
 function App() {
@@ -500,18 +503,53 @@ function App() {
     const currentCountry = currency1
     const currentCountry1 = currency2
      
-    setFav([...fav,currentCountry + " to " + currentCountry1]);
+    setFav([...fav,currentCountry + " " + currentCountry1]);
+    
   }
   
- 
-  
+  function remove(indexOfLayerClicked){
+    const updatedFav = fav.filter((layer, i) =>
+      i !== indexOfLayerClicked
+    )
+    setFav(updatedFav)
+  }
+
+  function changeLayer(indexOfLayerClicked){
+    const updatedFav = fav.filter((layer,i)=>{
+     if(i == indexOfLayerClicked){
+      return layer
+      }
+    })
+    const updatedFav1 = updatedFav.map((layer, i) => {
+      return layer.split(' ')
+    })
+   
+    // console.log(updatedFav1[0][0])
+    setCurrency1(updatedFav1[0][0])
+    setCurrency2(updatedFav1[0][1])
+   
+  }
+
   return (
-    
     <div className="App">
-      <Routes>
-        <Route path='/Favourites' element={ <Favourites />}/>
-      </Routes>
-      <Link to='/Favourites'>Favourites</Link>
+      <h3>Favourite Conversion Types</h3>
+      <div className="favorites">
+      <section className="fav">
+        {fav.map((fav, index) =>
+          // <p key={index}
+          // onClick={() => changeLayer(index)}>{fav}
+          // <button onClick={() => remove(index)}>X</button>
+          // </p>
+          <Chip key={index}
+          onClick={() => changeLayer(index)}
+          label={fav}
+           variant="outlined"
+          onDelete={() => remove(index)} 
+          />
+        )}
+      </section>
+      </div>
+      
       <h1>Send money from {currency1} to {currency2}</h1>
       <CurrencyInput
         onAmountChange={handleAmount1Change}
@@ -528,9 +566,9 @@ function App() {
         amount={amount2} 
         currency={currency2}
       />
-
-      <button onClick={saveFavourites}>Save the conversion</button>
-      <p>{fav}</p>
+      <div className="button">
+      <button onClick={saveFavourites}>Add Conversion to Favourites</button>
+      </div>
       </div>
 
   );
