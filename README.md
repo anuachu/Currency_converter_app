@@ -8,16 +8,15 @@ This is my last exciting project done in the Sofware Engineering Immersive bootc
 ------------------------------------------------------------------------------
   
  <li>Basically it can convert money of country and give the exchange rate on live</li>
- <li>There is a credit card where you can add money</li>
- <li>Add new credit card details</li>
- <li>you can pay the required amount for current country</li>
+ <li>Save the currency exachanges to favourites</li>
+ <li>Delete the particular item from favourites</li>
+ <li>When you click on a favourite, it will automatically change the UI to show that particular exchange-pair on the main screen.</li>
  
  :rocket: Cool tech
  -----------------------------------------------------------------------
  <li>REACT FRAMEWORK</li>
  <li>JAVASCRIPT</li>
- <li>CSS</li>
- <li>NODEJS</li>
+ <li>mui-MaterialUi</li>
  
  
  :fearful: Bugs to fix :poop:
