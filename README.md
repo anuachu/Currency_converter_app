@@ -2,7 +2,7 @@
 
 This is my last exciting project done in the Sofware Engineering Immersive bootcamp at General Assembly. This simple application is a very good example to showcase how a developer would move through obstacles and solves problems. 
 
-## :computer: [Click here](https://nameless-spire-56626.herokuapp.com/) to see my live project!
+## :computer: [Click here](https://anusha.surge.sh/) to see my live project!
 
 :pencil: Planning and Problem Solving
 ------------------------------------------------------------------------------
