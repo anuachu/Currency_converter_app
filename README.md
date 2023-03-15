@@ -35,14 +35,9 @@ If I could use time efficiently by working on features
  <li>Convertion Charge calculator</li>
  <li>Music to play</li>
  
- ```
- {
-user: "",
-password:"",
-host: "",
-port: "",
-database: "",
-}
+
+```
+npm run runner
 ```
  
 
